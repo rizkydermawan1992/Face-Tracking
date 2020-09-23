@@ -1,9 +1,9 @@
 #include<Servo.h>
 
-Servo servoX;
-Servo servoY;
-int x = 90;
-int y = 90;
+Servo servoX; //servo untuk sumbu X
+Servo servoY; //Servo untuk sumbu Y
+int x = 90; //nilai sudut awal untuk servo X
+int y = 90; //nilai sudut awal untuk servo Y
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
@@ -14,14 +14,14 @@ void setup() {
   servoY.write(y);
   delay(1000);
 }
-char input = ""; //serial input is stored in this variable
+char input = ""; //variabel serial input
 void loop() {
   // put your main code here, to run repeatedly:
- if(Serial.available()){ //checks if any data is in the serial buffer
-  input = Serial.read(); //reads the data into a variable
+ if(Serial.available()){ //Pengecekan data serial
+  input = Serial.read(); //Pembacaan data serial
   if(input == 'U'){
-   servoY.write(y+1);    //adjusts the servo angle according to the input
-   y += 1;               //updates the value of the angle
+   servoY.write(y+1);    //Perubahan nilai sudut servo berdasarkan input serial
+   y += 1;               //update nilai sudut servo
   }
   else if(input == 'D'){ 
    servoY.write(y-1);
@@ -40,7 +40,6 @@ void loop() {
   else{
   servoX.write(x);
   }
-  input = "";           //clears the variable
+  input = "";           //kosongkan variabel
   }
- //process keeps repeating!! :)
 }
