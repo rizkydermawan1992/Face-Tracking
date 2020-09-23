@@ -1,42 +1,36 @@
-#import all the required modules
-
 import numpy as np
 import serial
 import time
 import sys
 import cv2
 
-#Setup Communication path for arduino (In place of 'COM3' put the port to which your arduino is connected)
+#Silakan sesuaikan dengan port COM yang digunakan
 ard = serial.Serial('COM4', 9600) 
 time.sleep(2)
 print("Connected to arduino...")
 
-#importing the Haarcascade for face detection
+#import file xml
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
-#To capture the video stream from webcam.
+#capture video melalui webcam.
 vid = cv2.VideoCapture(0)
 
 while True:
-    _, frame = vid.read()#reads the current frame to the variable frame
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)#converts frame -> grayscaled image
+    _, frame = vid.read()
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         
-        #the following line detects faces.
-        #First parameter is the image on which you want to detect on
-        #minSize=() specifies the minimum size of the face in terms of pixels
-        #Click the above link to know more about the Cascade Classification
     faces = face_cascade.detectMultiScale(gray, minSize=(80, 80), minNeighbors=3)
         
-        #A for loop to detect the faces.
+    
     for (x, y, w, h) in faces:
-        cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 0), 2)#draws a rectangle around the face
+        cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 0), 2)#menampilkan kerangka persegi di sekitaran wajah
         Xpos = x+(w/2)#calculates the X co-ordinate of the center of the face.
         Ypos = y+(h/2)#calcualtes the Y co-ordinate of the center of the face
-        if Xpos > 280:                  #The following code blocks check if the face is    
-            ard.write('R'.encode()) #on the left, right, top or bottom with respect to the 
-            time.sleep(0.01)        #center of the frame. 
-        elif Xpos < 360:                #If any of the conditions are true, it send a command to
-            ard.write('L'.encode()) #the arduino through the serial bus.
+        if Xpos > 280:                  
+            ard.write('R'.encode())  
+            time.sleep(0.01)        
+        elif Xpos < 360:                
+            ard.write('L'.encode()) 
             time.sleep(0.01)
         else:
             ard.write('S'.encode())
@@ -55,17 +49,17 @@ while True:
     text = "Ypos = " + str(Ypos) + " Xpos = " + str(Xpos)
     cv2.putText(frame, 
                     text, 
-                    (10, 20),                     # text position (x0,y0) 
-                    cv2.FONT_HERSHEY_SIMPLEX,     # font
-                    0.9,                          # font scale 
-                    (0, 255, 255),                # color (B, G, R) 
-                    1)                            # thickness
+                    (10, 20),                     # posisi teks (x0,y0) 
+                    cv2.FONT_HERSHEY_SIMPLEX,     # jenis font
+                    0.9,                          # ukuran font 
+                    (0, 255, 255),                # warna (B, G, R) 
+                    1)                            # ketebalan
 
-    cv2.imshow('frame', frame)#displays the frame in a seperate window.
+    cv2.imshow('frame', frame)#membuka jendela.
     k = cv2.waitKey(1)&0xFF
-    if(k == ord('q')): #if 'q' is pressed on the keyboard, it exits the while loop.
+    if(k == ord('q')): #tekan tombol q pada keyboard untuk mengakhiri looping.
         break   
 
-cv2.destroyAllWindows() #closes all windows
-ard.close() #closes the serial communication
-vid.release() #stops receiving video from the web cam.
+cv2.destroyAllWindows() #menutup semua jendela
+ard.close() #mengakhiri komunikasi serial
+vid.release() #mengakhiri capture webcam.
