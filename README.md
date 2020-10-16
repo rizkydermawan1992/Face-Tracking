@@ -16,5 +16,5 @@ Material Required:
 - Jumper Wires
 - USB Cable
 
-##Autodetect serial port can be accessed in p.description. on windows
+### N.S: Autodetect serial port can be accessed in p.description, ex: on windows
 ![Windows Ports (COM & LPT)](serialport.jpg)
