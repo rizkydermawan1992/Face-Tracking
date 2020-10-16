@@ -5,18 +5,15 @@
 . pyserial 3.4
 . numpy 1.19.1
 
-## install requirement file with command
+## Install requirement file with command
 * pip install -r requirements.txt
-.
-control pan tilt servo arduino via serial comunnication by face tracking opencv
-.
-.
-.
-Material Required:
-- Arduino Uno Board
-- Pan Tilt Servo & 2 x Servo SG90
-- Jumper Wires
-- USB Cable
+
+## control pan tilt servo arduino via serial comunnication by face tracking opencv
+* Material Required:
+  - Arduino Uno Board
+  - Pan Tilt Servo & 2 x Servo SG90
+  - Jumper Wires
+  - USB Cable
 
 ## See wiring Schematic on
 <img src="wiring schematic.jpg" alt="Wiring Diagram Schematic Face Tracking" align="center">
