@@ -15,6 +15,7 @@ Material Required:
 - Pan Tilt Servo & 2 x Servo SG90
 - Jumper Wires
 - USB Cable
-
+## See wiring Schematic on
+![Wiring Schematic face tracking](wiring schematic.jpg)
 ### N.S: Autodetect serial port can be accessed in p.description, ex: on windows
 ![Windows Ports (COM & LPT)](serialport.jpg)
