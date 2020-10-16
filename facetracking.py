@@ -1,11 +1,19 @@
 import numpy as np
 import serial
+import serial.tools.list_ports
 import time
 import sys
 import cv2
 
-#Silakan sesuaikan dengan port COM yang digunakan
-ard = serial.Serial('COM4', 9600) 
+#Autodetect Serial
+def autodetect():
+    ports = list(serial.tools.list_ports.comports())
+    for p in ports:
+        #print (p)
+        if 'Arduino Uno' in p.description:
+            return p.device
+device=autodetect()
+ard = serial.Serial(device, 9600) 
 time.sleep(2)
 print("Connected to arduino...")
 
