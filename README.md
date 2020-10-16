@@ -16,6 +16,6 @@ Material Required:
 - Jumper Wires
 - USB Cable
 ## See wiring Schematic on
-![Wiring Schematic face tracking](wiring schematic.jpg)
+<img src="wiring schematic.jpg">
 ### N.S: Autodetect serial port can be accessed in p.description, ex: on windows
-![Windows Ports (COM & LPT)](serialport.jpg)
+<img src="serialport.jpg">
